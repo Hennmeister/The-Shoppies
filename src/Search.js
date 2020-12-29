@@ -35,8 +35,8 @@ export default function Search() {
             axios
                 .get(
                     appendResults
-                        ? `http://www.omdbapi.com/?s=${prevSearchTitle}&type=movie&page=${pageNumber}&apikey=58992cd9`
-                        : `http://www.omdbapi.com/?s=${searchTitle}&type=movie&page=1&apikey=58992cd9`
+                        ? `https://www.omdbapi.com/?s=${prevSearchTitle}&type=movie&page=${pageNumber}&apikey=58992cd9`
+                        : `https://www.omdbapi.com/?s=${searchTitle}&type=movie&page=1&apikey=58992cd9`
                 )
                 .then((response) => {
                     const newMovieEntries = []

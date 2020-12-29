@@ -1,0 +1,33 @@
+.flexWrapper {
+    background: rgba(0, 0, 0, 0.85);
+    background-size: 200% 200%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+}
+
+.flexWrapper > * {
+    margin: 4vh;
+}
+
+.particles {
+    background-image: url('cinema.jpg');
+    background-size: 100% 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0p;
+    z-index: -1;
+}
+
+.helpButton {
+    position: absolute !important;
+    top: 0px;
+    right: 0px;
+    font-size: 0.5em;
+    margin: 5px;
+}

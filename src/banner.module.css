@@ -1,0 +1,21 @@
+.banner {
+    height: 5vh;
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: rgba(155, 0, 0, 1);
+    border-radius: 15px;
+    overflow: hidden;
+    perspective: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 3px;
+    left: 0px;
+}
+
+.button {
+    height: 90%;
+    opacity: 1;
+    margin-left: auto;
+}

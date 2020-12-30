@@ -21,13 +21,15 @@ export default function Movie(props) {
                         paddingBottom: '10px',
                         lineHeight: 1.2,
                         paddingTop: '4vh',
-                        fontSize: '4em',
+                        fontSize: '2em',
                     }}
                 >
                     {props.title}
                 </Typography>
                 {!props.showAll ? (
-                    <Typography>{`Release Year: ${props.year}`}</Typography>
+                    <Typography
+                        style={{ fontSize: '1.3em' }}
+                    >{`Release Year: ${props.year}`}</Typography>
                 ) : null}
                 <Button
                     disabled={props.isNominationDisabled}

@@ -54,10 +54,12 @@ export default function Search() {
                         updatePrevSearchTitle(searchTitle)
                         updatePageNumber(1)
                     }
-                    updateNumResults(Number(response.data['totalResults']))
+                    const numRes = Number(response.data['totalResults'])
+                    updateNumResults(Number.isNaN(numRes) ? 0 : numRes)
                     updatePageNumber((prev) => prev + 1)
-                    if (searchResults.length === 0) {
+                    if (numRes === 0 || Number.isNaN(numRes)) {
                         updateTitleText('No Results')
+                        updatePageNumber(1)
                     }
                 })
                 .catch((error) => {

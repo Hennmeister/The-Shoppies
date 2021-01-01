@@ -4,6 +4,9 @@ import Input from './Input'
 import axios from 'axios'
 import MovieCarousel from './MovieCarousel'
 
+// Made public for deployment with Github pages
+const API_KEY = '58992cd9'
+
 export default function Search() {
     const [searchTitle, updateSearchTitle] = React.useState('')
     const [prevSearchTitle, updatePrevSearchTitle] = React.useState('')
@@ -37,8 +40,8 @@ export default function Search() {
         axios
             .get(
                 appendResults
-                    ? `https://www.omdbapi.com/?s=${prevSearchTitle}&type=movie&page=${pageNumber}&apikey=58992cd9`
-                    : `https://www.omdbapi.com/?s=${searchTitle}&type=movie&page=1&apikey=58992cd9`
+                    ? `https://www.omdbapi.com/?s=${prevSearchTitle}&type=movie&page=${pageNumber}&apikey=${API_KEY}`
+                    : `https://www.omdbapi.com/?s=${searchTitle}&type=movie&page=1&apikey=${API_KEY}`
             )
             .then((response) => {
                 const newMovieEntries = []

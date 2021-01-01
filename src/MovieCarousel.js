@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { MovieContext } from './movie-context'
+import React from 'react'
 import classes from './Movie.module.css'
 import Movie from './Movie'
 import Typography from '@material-ui/core/Typography'

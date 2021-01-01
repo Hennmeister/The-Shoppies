@@ -17,7 +17,10 @@ export default function Search() {
 
     const incrementScrollPosition = () => {
         updateIndex((prev) => Math.min(searchResults.length - 3, prev + 1))
-        if (searchResults.length - selectedIndex < 15) {
+        if (
+            searchResults.length - selectedIndex < 15 &&
+            numResults / 10 + 1 >= pageNumber
+        ) {
             sendSearchQuery(true)
         }
     }
@@ -31,41 +34,36 @@ export default function Search() {
     }
 
     const sendSearchQuery = (appendResults) => {
-        if (numResults / 10 + 1 >= pageNumber) {
-            axios
-                .get(
-                    appendResults
-                        ? `https://www.omdbapi.com/?s=${prevSearchTitle}&type=movie&page=${pageNumber}&apikey=58992cd9`
-                        : `https://www.omdbapi.com/?s=${searchTitle}&type=movie&page=1&apikey=58992cd9`
-                )
-                .then((response) => {
-                    const newMovieEntries = []
-                    for (const key in response.data.Search) {
-                        newMovieEntries.push(response.data.Search[key])
-                    }
-                    if (appendResults) {
-                        updateSearchResults((prev) => [
-                            ...prev,
-                            ...newMovieEntries,
-                        ])
-                    } else {
-                        updateSearchResults((prev) => [...newMovieEntries])
-                        updateIndex(0)
-                        updatePrevSearchTitle(searchTitle)
-                        updatePageNumber(1)
-                    }
-                    const numRes = Number(response.data['totalResults'])
-                    updateNumResults(Number.isNaN(numRes) ? 0 : numRes)
-                    updatePageNumber((prev) => prev + 1)
-                    if (numRes === 0 || Number.isNaN(numRes)) {
-                        updateTitleText('No Results')
-                        updatePageNumber(1)
-                    }
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        }
+        axios
+            .get(
+                appendResults
+                    ? `https://www.omdbapi.com/?s=${prevSearchTitle}&type=movie&page=${pageNumber}&apikey=58992cd9`
+                    : `https://www.omdbapi.com/?s=${searchTitle}&type=movie&page=1&apikey=58992cd9`
+            )
+            .then((response) => {
+                const newMovieEntries = []
+                for (const key in response.data.Search) {
+                    newMovieEntries.push(response.data.Search[key])
+                }
+                if (appendResults) {
+                    updateSearchResults((prev) => [...prev, ...newMovieEntries])
+                } else {
+                    updateSearchResults((prev) => [...newMovieEntries])
+                    updateIndex(0)
+                    updatePrevSearchTitle(searchTitle)
+                    updatePageNumber(1)
+                }
+                const numRes = Number(response.data['totalResults'])
+                updateNumResults(Number.isNaN(numRes) ? 0 : numRes)
+                updatePageNumber((prev) => prev + 1)
+                if (numRes === 0 || Number.isNaN(numRes)) {
+                    updateTitleText('No Results')
+                    updatePageNumber(1)
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     const canNominateMovie = (movie) =>
